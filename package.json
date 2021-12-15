@@ -18,5 +18,8 @@
   "license": "CC0-1.0",
   "devDependencies": {
     "electron": "^16.0.2"
+  },
+  "dependencies": {
+    "image-to-pdf": "^1.0.0"
   }
 }
