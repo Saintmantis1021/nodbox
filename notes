@@ -1,0 +1,30 @@
+const fs = require('fs');
+const imgToPDF = require('image-to-pdf');
+console.warn("fsg")
+imgToPDF(pages, 'A4').pipe(fs.createWriteStream('output.pdf'));
+
+
+
+
+window.location.href = "test.html";
+
+
+
+
+sudo npm install -g electron-builder
+electron-builder --mac
+
+
+reloader --
+
+npm install -D electron-reloader
+try {
+  require('electron-reloader')(module)
+} catch (_) {}
+
+
+center class
+justify-content: center;
+align-items: center;
+display: flex;
+

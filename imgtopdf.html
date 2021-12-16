@@ -1,21 +1,40 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-  
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
-    <link href="./styles.css" rel="stylesheet">
-    <title>Nodbox</title>
-  </head>
-  <body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nodbox</title>
+  <link href="./styles.css" rel="stylesheet">
 
-    <button id="openafile">Open a File</button>
+</head>
+<body>
 
-   
-   
-    
+<div class="btn-1">
+  <button id="openafile">Select Images</button>
+
+</div>  
   <script src="./renderer.js"></script>
-  <script src="script.js"></script>
+  <script>
+
+
    
-  </body>
+window.addEventListener("resize", function(){
+    window.resizeTo(800,600);
+    });
+const { app, BrowserWindow ,ipcMain,ipcRenderer} = require("electron");
+
+
+
+document.getElementById("openafile").addEventListener("click",myFun);
+function myFun(){
+ipcRenderer.send("openafile")
+
+}
+ipcRenderer.on("reply",(event,data)=>{
+    console.log("success")
+    window.location.href = "imgtopdf2.html";
+})
+  
+  </script>
+</body>
 </html>

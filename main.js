@@ -4,6 +4,9 @@ const { app, BrowserWindow ,ipcMain,dialog,mainWindow,remote} = electron;
 const path = require('path')
 const fs = require('fs');
 const imgToPDF = require('image-to-pdf');
+try {
+  require('electron-reloader')(module)
+} catch (_) {}
 
 
 
@@ -14,8 +17,8 @@ const imgToPDF = require('image-to-pdf');
 function createWindow () {
 
   const mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 1200,
+    height: 720,
     maximizable: false,
     webPreferences: {
     preload: path.join(__dirname, 'preload.js'),
@@ -56,7 +59,8 @@ ipcMain.on("openafile",(event)=>{
   dialog.showOpenDialog(options).then((result)=>{
 
   console.warn("res",result)
-  var pages=result.filePaths
+  pages=result.filePaths
+  console.warn(pages)
 
 
   if(result.canceled==false){
@@ -73,7 +77,7 @@ console.warn("file not selected")
 
 
 
-ipcMain.on("whereto",(e)=>{
+ipcMain.on("whereto",(event)=>{
 
 options={
   title:"select the file",
@@ -84,8 +88,6 @@ options={
 dialog.showSaveDialog(options).then((result)=>{
   out=result.filePath+".pdf"
   console.warn(out)
-
-
   if(result.canceled==false){
     event.reply("imgtopdf","true")
     console.warn("test2")
@@ -94,6 +96,9 @@ dialog.showSaveDialog(options).then((result)=>{
   else{
 console.warn("file not selected")
   }
+  console.warn("test3")
+
+
 
 
 })
@@ -102,11 +107,14 @@ console.warn("file not selected")
 })
 
 
-ipcMain.on("imgtopdf_convert",(e)=>{
+ipcMain.on("imgtopdf_convert",(event)=>{
 
 console.warn("started converting imgtopdf")
+console.warn(pages)
+console.warn(out)
 imgToPDF(pages, 'A4').pipe(fs.createWriteStream(out));
-
+event.reply("imgtopdfconvertfinal","true")
+console.warn("test4")
 
 })
 

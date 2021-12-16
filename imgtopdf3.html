@@ -9,11 +9,13 @@
   </head>
   <body>
 
-<div class="btn-1">
-<button id="btn1">Save To</button>
+   <div class="btn-1">
+<button id="btn2">Convert</button>
 
-</div>
+   </div>
 <img id="back-button"src="res/back.png" alt="back">
+
+
 <script>
   window.addEventListener("resize", function(){
     window.resizeTo(800,600);
@@ -22,15 +24,15 @@ const { app, BrowserWindow ,ipcMain,ipcRenderer} = require("electron");
 
 function myFunction(){
     
-    ipcRenderer.send("whereto")
+    ipcRenderer.send("imgtopdf_convert")
    }
-document.getElementById("btn1").addEventListener("click", myFunction);
+document.getElementById("btn2").addEventListener("click", myFunction);
 
 
 
-ipcRenderer.on("imgtopdf",(event,data)=>{
+ipcRenderer.on("imgtopdfconvertfinal",(event,data)=>{
     console.log("success")
-    window.location.href = "imgtopdf3.html";
+    window.location.href = "imgtopdf4.html";
 })
 document.getElementById("back-button").addEventListener("click",function(){
   window.location.href = "imgtopdf.html";
